@@ -1,0 +1,6 @@
+
+node_modules/
+.env
+sorteoMVC/public/build/
+sorteoMVC/vendor/
+sorteoMVC/.vscode/sftp.json
