@@ -1,27 +1,16 @@
-<?php
+<?php 
+
 namespace Model;
 
-class Compra extends ActiveRecord{
-    //Base de Datos
-    protected static $tabla = 'compra';
-    protected static $columnasDB = ['compraId', 'productoId', 'usuarioId', 'numero', 'precioTotal'];
-    
+class Compra extends ActiveRecord {
+    protected static $tabla = 'numero';
+    protected static $columnaDB = ['compraId', 'productoId' ,'numero', 'compraConfirmada'];
+
     public $compraId;
     public $productoId;
-    public $usuarioId;
     public $numero;
-    public $precioTotal;
+    public $compraConfirmada;
 
-    public function __construct($args = []){
-        $this->compraId = $args['compraId'] ?? null;
-        $this->productoId = $args['productoId'] ?? '';
-        $this->usuarioId = $args['usuarioId'] ?? '';
-        $this->numero = $args['numero'] ?? '';
-        $this->precioTotal = $args['precioTotal'] ?? '';
-        
-    }
 }
-
-
 
 ?>
