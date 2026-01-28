@@ -26,10 +26,9 @@
     </header>
     <?php 
         echo $contenido;
+        include_once __DIR__ .'/templates/footer.php'; 
     ?>
-    <footer class="contenedor contenido-footer">
 
-    </footer>
 
     <script src="/build/js/main.min.js" defer></script>
 </body>
