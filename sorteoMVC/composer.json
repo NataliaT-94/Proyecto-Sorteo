@@ -2,7 +2,10 @@
     "name": "natt1/sorteo-mvc",
     "autoload": {
         "psr-4": {
-            "Natt1\\SorteoMvc\\": "src/"
+            "MVC\\": "./",
+            "Controllers\\": "./controllers",
+            "Model\\": "./models",
+            "Classes\\": "./classes"
         }
     },
     "authors": [
@@ -12,6 +15,7 @@
         }
     ],
     "require": {
-        "phpmailer/phpmailer": "^7.0"
+        "phpmailer/phpmailer": "^7.0",
+        "vlucas/phpdotenv": "^5.6"
     }
 }

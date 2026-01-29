@@ -63,13 +63,14 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
-        
-       const nombre = textInput.value;
-       const telefono = telInput.value;
-       const precioTotal = totalInput.value;
+       const sorteo = {
+        nombre: textInput.value.trim(),
+        telefono: telInput.value.trim(),
+        precioTotal: Number(totalInput.value)
+       }
 
 
-        console.log('Compra enviada:', numeros, nombre, telefono, precioTotal);
+        console.log('Compra enviada:', numeros, sorteo);
     }
 
 });

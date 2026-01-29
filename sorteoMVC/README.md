@@ -36,8 +36,20 @@ sorteo:
 # Instalar composer
     composer init
 
+# Instalar phpdotenv
+    composer require vlucas/phpdotenv
+
+
 # Instalar phpmailer
     composer require phpmailer/phpmailer
+
+# Recordar colocar en el composer.json
+        "psr-4": {
+            "MVC\\": "./",
+            "Controllers\\": "./controllers",
+            "Model\\": "./models",
+            "Classes\\": "./classes"
+        }
 
 # Instalar npm
     npm init

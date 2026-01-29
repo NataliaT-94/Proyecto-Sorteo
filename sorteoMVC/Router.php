@@ -31,11 +31,13 @@ class Router
         if($fn){
             call_user_func($fn, $this);
         }else{
-            header('Location: /404');
+            // header('Location: /404');
+            http_response_code(404);
+            $this->render('404');
         }
     }
 
-    public function rendeer($view, $datos = [])
+    public function render($view, $datos = [])
     {
         foreach($datos as $key=>$value){
             $$key = $value;
@@ -43,7 +45,7 @@ class Router
 
         ob_start();
 
-        include_once __DIR__ . "views/$view.php";
+        include_once __DIR__ . "/views/$view.php";
 
         $contenido = ob_get_clean();
 
