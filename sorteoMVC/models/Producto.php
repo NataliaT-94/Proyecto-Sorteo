@@ -4,12 +4,12 @@ namespace Model;
 
 class Compra extends ActiveRecord {
     protected static $tabla = 'producto';
-    protected static $columnaDB = ['productoId' ,'nombre', 'precio', 'fecha', 'descripcion'];
+    protected static $columnaDB = ['id' ,'nombre', 'descripcion', 'fecha', 'precio'];
 
-    public $productoId;
+    public $id;
     public $nombre;
-    public $precio;
-    public $fecha;
     public $descripcion;
+    public $fecha;
+    public $precio;
 
 }

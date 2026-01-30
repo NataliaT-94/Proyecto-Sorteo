@@ -53,7 +53,7 @@
         });
     }    
 
-    function submitLista(e) {
+    async function submitLista(e) {
         e.preventDefault();
 
         if (numeros.length === 0) {
@@ -61,14 +61,27 @@
             return;
         }
 
-       const sorteo = {
-        nombre: textInput.value.trim(),
-        telefono: telInput.value.trim(),
-        precioTotal: Number(totalInput.value)
-       }
+        const nombre = document.querySelector('#nombre'). value;
+        const telefono = document.querySelector('#telefono'). value;
+        const precioTotal = document.querySelector('.numero')?.dataset.precio;
 
+        if (!nombre || !telefono || seleccionados.length === 0) {
+            alert('Completá todos los datos');
+            return;
+        }
 
-        console.log('Compra enviada:', numeros, sorteo);
+        const respuesta = await fetch('/api/comprar', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                nombre,
+                telefono,
+                numeros: seleccionados,
+                precioTotal
+            })
+        })
+        
     }
+
 
 })();

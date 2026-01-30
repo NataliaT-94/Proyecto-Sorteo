@@ -2,15 +2,13 @@
 
 namespace Controllers;
 
-use Model\Compra;
+
+use Model\Numero;
 use Model\Producto;
-use Model\Sorteo;
 
 class APIController{
     public static function index(){
-        $compra = Compra::all();
-        echo json_encode($compra);
+        $numero = Numero::all();
+        echo json_encode($numero);
     }
-
-     
 }
