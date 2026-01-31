@@ -8,13 +8,13 @@ use Model\Producto;
 
 class ProductoController{
     public static function index(Router $router){
-        $producto = Producto::find(1);
-        echo json_encode($producto, JSON_UNESCAPED_SLASHES);
+        $producto =Producto::find(1);
+        // echo json_encode($producto, JSON_UNESCAPED_SLASHES);
         
-        $numeros = Numero::where('productoId', 1);
+        $numeros = Numero::all();
 
 
-        $router->render('/layout.php',[
+        $router->render('templates/header',[
             'producto' => $producto,
             'numeros' => $numeros
         ]);

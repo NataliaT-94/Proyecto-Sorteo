@@ -80,6 +80,15 @@
                 precioTotal
             })
         })
+
+        const resultado = await respuesta.json();
+
+        if (resultado.ok) {
+            alert('Compra exitosa');
+            location.reload();
+        } else {
+            alert(resultado.error);
+        }
         
     }
 

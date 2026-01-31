@@ -98,6 +98,12 @@ class ActiveRecord
         $resultado = self::consultarSQL($query);
         return array_shift( $resultado ) ;
     }
+
+    public static function where($columna, $valor) {
+        $query = "SELECT * FROM " . static::$tabla . " WHERE {$columna} = '{$valor}'";
+        $resultado = self::consultarSQL($query);
+        return array_shift( $resultado ) ;
+    }
     
     //Traer un total de registros
     public static function total($columna = '', $valor = '') {
