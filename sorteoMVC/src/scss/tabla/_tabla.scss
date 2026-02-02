@@ -1,0 +1,14 @@
+.tabla-sorteo td {
+    cursor: pointer;
+}
+
+.tabla-sorteo td.vendido {
+    background: #999;
+    color: #fff;
+    cursor: not-allowed;
+}
+
+.tabla-sorteo td.seleccionado {
+    background: green;
+    color: white;
+}

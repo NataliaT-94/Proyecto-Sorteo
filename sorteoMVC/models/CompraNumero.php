@@ -6,7 +6,7 @@ class CompraNumero extends ActiveRecord {
     protected static $tabla = 'compraNumero';
     protected static $columnaDB = ['id', 'clienteId' ,'numeroId'];
 
-    public $compraId;
+    public $id;
     public $clienteId;
     public $numeroId;
 

@@ -1,8 +1,8 @@
     <footer class="contenedor contenido-footer">
-        <div class="contenido-footer__grid">
-            <div class="contenido-footer__registro">
+        <div class="contenido-footer-grid">
+            <div class="contenido-footer-registro">
                 <form class="formulario" action="">
-                    <div class="formulario__datos">
+                    <div class="formulario-datos">
                         <label for="nombre">Nombre</label>
                         <input type="text" class="form-control" placeholder="Nombre" name="nombre" id="nombre">
                         <label for="telefono">Telefono</label>
@@ -10,8 +10,8 @@
                 </form>
                 </div>
                 <div class="lista">
-                    <h4 class="lista__titulo">Tus Numeros</h4>
-                    <ul class="lista__numero"></ul>
+                    <h4 class="lista-titulo">Tus Numeros</h4>
+                    <ul class="lista-num"></ul>
                 </div>
                 <div class="precio">
                     <label for="total">TOTAL</label>

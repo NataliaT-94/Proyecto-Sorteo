@@ -3,7 +3,7 @@
 require_once __DIR__ . '/../includes/app.php';
 
 use MVC\Router;
-use Controllers\APIController;
+use Controllers\NumeroController;
 use Controllers\ProductoController;
 
 
@@ -12,7 +12,10 @@ $router = new Router();
 $router->get('/', [ProductoController::class, 'index']);
 
 //API
-$router->get('/api/numero', [APIController::class, 'index']);
+
+$router->get('/api/numero', [NumeroController::class, 'index']);
+$router->post('/api/comprar', [NumeroController::class, 'comprar']);
+
 
 
 // $router->get('/layout', [ProductoController::class, 'index']);

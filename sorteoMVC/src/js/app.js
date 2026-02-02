@@ -1,96 +1,135 @@
-(function(){
+(function () {
 
-    let numeros = [];
-    
-    const celdas = document.querySelectorAll('.tabla-sorteo td');
+    let numerosSeleccionados = [];
+
     const totalInput = document.querySelector('#total');
-    const textInput = document.querySelector('#nombre');
-    const telInput = document.querySelector('#telefono');
+    const nombreInput = document.querySelector('#nombre');
+    const telefonoInput = document.querySelector('#telefono');
     const form = document.querySelector('form');
     const lista = document.querySelector('.lista-num');
 
-    celdas.forEach(td => {
-        td.addEventListener('click', seleccionarNumero);
+    const PRECIO = 3000;
+
+    document.addEventListener('DOMContentLoaded', () => {
+        activarEventos();
     });
 
-    form.addEventListener('submit', submitLista);
+    function activarEventos() {
+        const celdas = document.querySelectorAll('.tabla-sorteo td');
 
-    function seleccionarNumero(e) {
-        const target = e.target;
-        const numero = target.textContent.trim();
+        celdas.forEach(td => {
+            if (td.classList.contains('vendido')) return;
 
-        if (target.classList.contains('seleccionado')) {
-            target.classList.remove('seleccionado'); // Quita si existe
-            numeros = numeros.filter(n => n !== numero);
-            console.log('Clase eliminada');
+            td.addEventListener('click', () => seleccionarNumero(td));
+        });
+    }
+
+    function seleccionarNumero(td) {
+        const id = td.dataset.id;
+        const numero = td.textContent.trim();
+
+        if (td.classList.contains('seleccionado')) {
+            td.classList.remove('seleccionado');
+            numerosSeleccionados = numerosSeleccionados.filter(n => n.id !== id);
         } else {
-            target.classList.add('seleccionado'); // Agrega si no existe
-            numeros.push(numero);
-            console.log('Clase agregada');
+            td.classList.add('seleccionado');
+            numerosSeleccionados.push({ id, numero });
         }
 
-        totalInput.value = numeros.length * 3000;
-
-        console.log('Seleccionados:', numero);
-
-        
+        actualizarTotal();
         mostrarNumeros();
     }
 
-    function mostrarNumeros(){
+    function mostrarNumeros() {
         lista.innerHTML = '';
-        numeros.forEach( (numero, id) => {
-            const numSeleccionado = document.createElement('li');
-            numSeleccionado.classList.add('numero', 'seleccionado');
 
-            numSeleccionado.innerHTML = `
-                <p>${numero}</p>
-                <i class="fa-solid fa-trash-can" data-id="${id}"></i>
-            `;
-
-            lista.appendChild(numSeleccionado);
-
+        numerosSeleccionados.forEach(n => {
+            const li = document.createElement('li');
+            li.textContent = n.numero;
+            lista.appendChild(li);
         });
-    }    
+    }
 
-    async function submitLista(e) {
+    function actualizarTotal() {
+        totalInput.value = numerosSeleccionados.length * PRECIO;
+    }
+
+    async function enviarCompra(e) {
         e.preventDefault();
 
-        if (numeros.length === 0) {
-            alert('Debes seleccionar al menos un número');
+        if (numerosSeleccionados.length === 0) {
+            alert('Seleccioná al menos un número');
             return;
         }
 
-        const nombre = document.querySelector('#nombre'). value;
-        const telefono = document.querySelector('#telefono'). value;
-        const precioTotal = document.querySelector('.numero')?.dataset.precio;
-
-        if (!nombre || !telefono || seleccionados.length === 0) {
-            alert('Completá todos los datos');
+        if (!nombreInput.value || !telefonoInput.value) {
+            alert('Completá nombre y teléfono');
             return;
         }
+
+        console.log({
+            nombre,
+            telefono,
+            numeros: numerosSeleccionados
+        });
 
         const respuesta = await fetch('/api/comprar', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                nombre,
-                telefono,
-                numeros: seleccionados,
-                precioTotal
+                nombre: nombreInput.value,
+                telefono: telefonoInput.value,
+                numeros: numerosSeleccionados.map(n => n.id)
             })
-        })
+        });
 
         const resultado = await respuesta.json();
 
         if (resultado.ok) {
-            alert('Compra exitosa');
-            location.reload();
+            alert('Compra realizada');
+            numerosSeleccionados = [];
+            form.reset();
+            actualizarTotal();
+            mostrarNumeros();
+            recargarTabla();
         } else {
-            alert(resultado.error);
+            alert(resultado.error || 'Error al comprar');
         }
-        
     }
 
+    form.addEventListener('submit', enviarCompra);
+
+    async function recargarTabla() {
+        const respuesta = await fetch('/api/numeros');
+        const numeros = await respuesta.json();
+
+        const tbody = document.querySelector('.tabla-sorteo tbody');
+        tbody.innerHTML = '';
+
+        let tr = document.createElement('tr');
+
+        numeros.forEach((n, index) => {
+            const td = document.createElement('td');
+            td.textContent = String(n.numero).padStart(2, '0');
+            td.dataset.id = n.id;
+
+            if (n.vendido == 1) {
+                td.classList.add('vendido');
+            } else {
+                td.addEventListener('click', () => seleccionarNumero(td));
+            }
+
+            tr.appendChild(td);
+
+            if ((index + 1) % 10 === 0) {
+                tbody.appendChild(tr);
+                tr = document.createElement('tr');
+            }
+        });
+
+        if (tr.children.length) {
+            tbody.appendChild(tr);
+        }
+    }
 
 })();

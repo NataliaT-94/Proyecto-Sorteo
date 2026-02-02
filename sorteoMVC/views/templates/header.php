@@ -6,6 +6,7 @@
             </div>
             <div class="producto">
                 <img src="" alt="Foto Producto">
+                <h2 class="producto-nombre"><?= $producto->nombre ?></h2>
                 <p class="producto-descripcion"><?= $producto->descripcion ?></p>
             </div>
         </div>

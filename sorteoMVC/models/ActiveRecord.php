@@ -182,5 +182,10 @@ class ActiveRecord
         return $resultado;
     }
 
+    public static function ordenados() {
+    $query = "SELECT * FROM " . static::$tabla . " ORDER BY numero ASC";
+    return static::consultarSQL($query);
+}
+
 
 }

@@ -11,7 +11,7 @@ class ProductoController{
         $producto =Producto::find(1);
         // echo json_encode($producto, JSON_UNESCAPED_SLASHES);
         
-        $numeros = Numero::all();
+        $numeros = Numero::ordenados();
 
 
         $router->render('templates/header',[
