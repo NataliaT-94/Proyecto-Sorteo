@@ -10,6 +10,12 @@ class CompraNumero extends ActiveRecord {
     public $clienteId;
     public $numeroId;
 
+    public function __construct($args = [])
+    {
+        $this->id = $args['id'] ?? null;
+        $this->clienteId = $args['clienteId'] ?? null;
+        $this->numeroId = $args['numeroId'] ?? null;
+    }
 
 
 }

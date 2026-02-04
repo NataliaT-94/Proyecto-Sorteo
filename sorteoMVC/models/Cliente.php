@@ -10,6 +10,15 @@ class Cliente extends ActiveRecord {
     public $telefono;
     public $precioTotal;
 
+    public function __construct($args = [])
+    {
+        $this->id = $args['id'] ?? null;
+        $this->nombre = $args['nombre'] ?? '';
+        $this->telefono = $args['telefono'] ?? '';
+        $this->precioTotal = $args['precioTotal'] ?? '';
+
+    }
+
 }
 
 

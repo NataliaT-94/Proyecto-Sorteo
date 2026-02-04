@@ -1,4 +1,4 @@
-<main class="contenedor-tabla">
+<main class="contenedor contenido-tabla">
 
     <section>
         <table class="tabla-sorteo">
