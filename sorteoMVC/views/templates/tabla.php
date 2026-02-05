@@ -9,7 +9,7 @@
                     foreach ($numeros as $numero):
                         $contador++;
                 ?>
-                    <td data-id="<?= $numero->id ?>" class="<?= $numero->vendido ? 'vendido' : '' ?>">
+                    <td data-id="<?= $numero->id ?>" class="numero<?= $numero->vendido ? 'vendido' : '' ?>">
                         <?= str_pad($numero->numero, 2, '0', STR_PAD_LEFT) ?>
                     </td>
                 <?php

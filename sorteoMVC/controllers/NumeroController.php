@@ -28,7 +28,7 @@ class NumeroController {
         if (
             empty($data['nombre']) ||
             empty($data['telefono']) ||
-            empty($data['numeros'])
+            empty($data['numeros']) 
         ) {
             http_response_code(400);
             echo json_encode(['ok' => false, 'error' => 'Datos incompletos']);

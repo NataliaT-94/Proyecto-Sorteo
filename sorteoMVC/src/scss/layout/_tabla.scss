@@ -1,0 +1,33 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+
+
+.tabla-sorteo {
+    margin: 3rem auto;
+    border-collapse: collapse;
+    
+    .numero {
+        border: 1px solid v.$gris;
+        text-align: center;
+        font-weight: 600;
+        cursor: pointer;
+        background: transparent;
+        user-select: none;
+        padding: 3rem;
+        font-size: 2rem;
+        color: v.$negro;
+
+
+        &.vendido {
+            background: v.$blanco;
+            color: v.$gris;
+            cursor: not-allowed;
+        }
+            
+        &.seleccionado {
+            background: v.$verde;
+            color: v.$blanco;
+        }
+    }
+}

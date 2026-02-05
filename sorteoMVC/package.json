@@ -35,7 +35,6 @@
     "webpack-stream": "^7.0.0"
   },
   "dependencies": {
-    "gulp-avif": "^1.1.1",
     "gulp-imagemin": "^7.1.0",
     "gulp-plumber": "^1.2.1",
     "gulp-webp": "^4.0.1"

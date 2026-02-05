@@ -1,0 +1,75 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.registro{
+    .formulario{
+        margin-top: 5rem;
+        width: 100%;
+
+        .formulario-datos{
+            display: flex;
+            margin-bottom: 2rem;
+            align-items: center;
+
+            label{
+                flex: 0 0 10rem;
+                font-size: 2rem;
+                color: v.$negro;
+
+            }
+            input{
+                flex: 1;
+                font-size: 2rem;
+                border: none;
+                padding: calc(v.$separacion/4);
+                border-radius: 1rem;
+                -webkit-border-radius: 1rem;
+                -moz-border-radius: 1rem;
+                -ms-border-radius: 1rem;
+                -o-border-radius: 1rem;
+
+                &:disabled{
+                    background-color: lighten(v.$naranja, 40%);
+                    color: v.$blanco;
+                    cursor: not-allowed;
+                }
+
+            }
+        }
+    }
+
+    .lista{
+
+    }
+
+    .precio{
+        label{
+            flex: 0 0 10rem;
+            font-size: 2rem;
+            color: v.$negro;
+
+        }
+        input{
+            flex: 1;
+            font-size: 2rem;
+            border: none;
+            padding: calc(v.$separacion/4);
+            border-radius: 1rem;
+            -webkit-border-radius: 1rem;
+            -moz-border-radius: 1rem;
+            -ms-border-radius: 1rem;
+            -o-border-radius: 1rem;
+
+            &:disabled{
+                background-color: lighten(v.$naranja, 40%);
+                color: v.$blanco;
+                cursor: not-allowed;
+            }
+
+            .compra{
+                background: v.$naranja;
+            }
+
+        }
+    }
+}
