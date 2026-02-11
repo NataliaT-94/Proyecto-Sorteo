@@ -1,0 +1,61 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.encabezado{
+    //     @include m.tablet{
+    //     height: 100%;
+    // }
+    display: flex;
+    gap: 2rem; //separa imagen de texto
+    justify-content: center;
+
+    .encabezado-logo{
+        border-radius: 50%;
+}
+    .encabezado-titulo{
+        align-items: flex-end;
+    }
+
+}
+
+
+
+
+.producto{
+            @include m.tablet{
+        height: 100%;
+    }
+    display: flex;
+    gap: 2rem; //separa imagen de texto
+    border: 1px solid v.$blanco;
+    background: v.$amarillo;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+    .producto-imagen{
+       height: 25rem;
+       width: 20rem;
+       background-image: url(/sorteoMVC/public/build/img/ventilador3.png); 
+       background-size: cover;
+       background-position: center center;
+       border: 1px solid v.$negro;
+       flex-shrink: 0; // evita que se achique
+    }
+
+    .producto-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: left;
+        padding: 2rem;
+
+        .producto-nombre{
+            height: 5rem;
+            width: 50rem;
+        }
+    
+        .producto-descripcion{
+            height: 10rem;
+            width: 50rem;
+        }
+    }
+
+}
