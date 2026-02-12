@@ -15,7 +15,7 @@ class NumeroController {
     }
 
     // POST /api/comprar
-    public static function comprar() {
+   public static function comprar() {
 
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             http_response_code(405);
@@ -53,7 +53,6 @@ class NumeroController {
             return;
         }
 
-
         foreach ($data['numeros'] as $numeroId) {
 
             $numeroId = filter_var($numeroId, FILTER_VALIDATE_INT);
@@ -63,11 +62,9 @@ class NumeroController {
 
             if ($numero && !$numero->estaVendido()) {
 
-                // marcar como vendido
                 $numero->vendido = 1;
                 $numero->guardar();
 
-                // guardar relación cliente - número
                 $compra = new CompraNumero([
                     'clienteId' => $clienteId,
                     'numeroId' => $numeroId
@@ -82,4 +79,5 @@ class NumeroController {
             'mensaje' => 'Compra realizada correctamente'
         ]);
     }
+
 }

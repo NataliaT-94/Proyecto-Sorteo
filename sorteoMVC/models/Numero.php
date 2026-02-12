@@ -4,7 +4,7 @@ namespace Model;
 
 class Numero extends ActiveRecord {
     protected static $tabla = 'numero';
-    protected static $columnaDB = ['id', 'numero' ,'vendido'];
+    protected static $columnasDB = ['id', 'numero' ,'vendido'];
 
     public $id;
     public $numero;
@@ -18,7 +18,8 @@ class Numero extends ActiveRecord {
     }
 
         public function estaVendido(): bool {
-        return $this->vendido === 1;
+        return (int)$this->vendido === 1;
+
     }
 }
 

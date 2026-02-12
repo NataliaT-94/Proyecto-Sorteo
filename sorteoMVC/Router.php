@@ -18,24 +18,24 @@ class Router
     }
 
     public function comprobarRutas()
-    {
-        $url_actual = $_SERVER['PATH_INFO'] ?? '/';
-        $method = $_SERVER['REQUEST_METHOD'];
+{
+    $url_actual = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+    $method = $_SERVER['REQUEST_METHOD'];
 
-        if($method ==='GET'){
-            $fn = $this->getRoutes[$url_actual] ?? null;
-            }else{
-            $fn = $this->postRoutes[$url_actual] ?? null;
-        }
-
-        if($fn){
-            call_user_func($fn, $this);
-        }else{
-            // header('Location: /404');
-            http_response_code(404);
-            $this->render('404');
-        }
+    if($method === 'GET'){
+        $fn = $this->getRoutes[$url_actual] ?? null;
+    } else {
+        $fn = $this->postRoutes[$url_actual] ?? null;
     }
+
+    if($fn){
+        call_user_func($fn, $this);
+    } else {
+        http_response_code(404);
+        echo "404 - Ruta no encontrada";
+    }
+}
+
 
     public function render($view, $datos = [])
     {

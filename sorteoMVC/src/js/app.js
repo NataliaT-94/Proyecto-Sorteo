@@ -68,39 +68,41 @@
         }
 
         console.log({
-            nombre,
-            telefono,
+            nombre: nombreInput.value,
+            telefono: telefonoInput.value,
             numeros: numerosSeleccionados
         });
 
-        const respuesta = await fetch('/api/comprar', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                nombre: nombreInput.value,
-                telefono: telefonoInput.value,
-                numeros: numerosSeleccionados.map(n => n.id)
-            })
-        });
+        try {
+            const respuesta = await fetch('/api/comprar', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    nombre: nombreInput.value,
+                    telefono: telefonoInput.value,
+                    numeros: numerosSeleccionados.map(n => n.id)
+                })
+            });
 
-        const resultado = await respuesta.json();
+            const resultado = await respuesta.json();
+            console.log('RESPUESTA API:', resultado);
 
-        if (resultado.ok) {
-            alert('Compra realizada');
-            numerosSeleccionados = [];
-            form.reset();
-            actualizarTotal();
-            mostrarNumeros();
-            recargarTabla();
-        } else {
-            alert(resultado.error || 'Error al comprar');
+            if (resultado.ok) {
+                alert('Compra realizada');
+            } else {
+                alert(resultado.error || 'Error al comprar');
+            }
+
+        } catch (error) {
+            console.error('ERROR FETCH:', error);
         }
     }
+
 
     form.addEventListener('submit', enviarCompra);
 
     async function recargarTabla() {
-        const respuesta = await fetch('/api/numeros');
+        const respuesta = await fetch('/api/numero');
         const numeros = await respuesta.json();
 
         const tbody = document.querySelector('.tabla-sorteo tbody');

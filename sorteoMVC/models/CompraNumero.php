@@ -3,8 +3,8 @@
 namespace Model;
 
 class CompraNumero extends ActiveRecord {
-    protected static $tabla = 'compraNumero';
-    protected static $columnaDB = ['id', 'clienteId' ,'numeroId'];
+    protected static $tabla = 'compranumero';
+    protected static $columnasDB = ['id', 'clienteId' ,'numeroId'];
 
     public $id;
     public $clienteId;

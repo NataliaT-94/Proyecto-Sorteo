@@ -2,9 +2,6 @@
 @use 'base/mixins' as m;
 
 .encabezado{
-    //     @include m.tablet{
-    //     height: 100%;
-    // }
     display: flex;
     gap: 2rem; //separa imagen de texto
     justify-content: center;
@@ -22,9 +19,6 @@
 
 
 .producto{
-            @include m.tablet{
-        height: 100%;
-    }
     display: flex;
     gap: 2rem; //separa imagen de texto
     border: 1px solid v.$blanco;
