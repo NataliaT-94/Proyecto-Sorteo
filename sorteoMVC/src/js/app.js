@@ -18,7 +18,7 @@
         const celdas = document.querySelectorAll('.tabla-sorteo td');
 
         celdas.forEach(td => {
-            if (td.classList.contains('vendido')) return;
+            if (td.classList.contains('numerovendido')) return;
             td.addEventListener('click', () => seleccionarNumero(td));
         });
     }
@@ -94,9 +94,11 @@
             if (resultado.ok) {
 
                 numerosSeleccionados = [];
+
                 actualizarTotal();
                 mostrarNumeros();
-                recargarTabla();
+
+                await recargarTabla();
 
                 nombreInput.value = '';
                 telefonoInput.value = '';
@@ -127,7 +129,7 @@
             td.dataset.id = n.id;
 
             if (n.vendido == 1) {
-                td.classList.add('vendido');
+                td.classList.add('numerovendido');
             } else {
                 td.addEventListener('click', () => seleccionarNumero(td));
             }

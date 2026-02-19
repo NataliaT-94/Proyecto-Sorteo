@@ -1,7 +1,7 @@
 <footer class="contenedor contenido-footer">
     <div class="registro">
 
-       <form class="formulario">
+       <form class="formulario" action="#">
             <div class="formulario-datos">
                 <div class="campo">
                     <label for="nombre">Nombre</label>
@@ -24,6 +24,7 @@
                 <input type="number" placeholder="total" id="total">
 
                 <button type="submit" class="comprar">Comprar</button>
+                
             </div>
 
         </form>
