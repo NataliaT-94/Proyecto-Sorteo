@@ -19,7 +19,6 @@
 
         celdas.forEach(td => {
             if (td.classList.contains('vendido')) return;
-
             td.addEventListener('click', () => seleccionarNumero(td));
         });
     }
@@ -57,21 +56,22 @@
     async function enviarCompra(e) {
         e.preventDefault();
 
+        limpiarErrores();
+
         if (numerosSeleccionados.length === 0) {
-            alert('Seleccioná al menos un número');
+            mostrarError(totalInput, 'Seleccioná al menos un número');
             return;
         }
 
-        if (!nombreInput.value || !telefonoInput.value) {
-            alert('Completá nombre y teléfono');
+        if (!nombreInput.value.trim()) {
+            mostrarError(nombreInput, 'Ingresá tu nombre');
             return;
         }
 
-        console.log({
-            nombre: nombreInput.value,
-            telefono: telefonoInput.value,
-            numeros: numerosSeleccionados
-        });
+        if (!telefonoInput.value.trim()) {
+            mostrarError(telefonoInput, 'Ingresá tu teléfono');
+            return;
+        }
 
         try {
             const respuesta = await fetch('/api/comprar', {
@@ -88,16 +88,24 @@
             console.log('RESPUESTA API:', resultado);
 
             if (resultado.ok) {
-                alert('Compra realizada');
+                console.log('Compra realizada');
+
+                // Limpieza opcional después de comprar
+                numerosSeleccionados = [];
+                actualizarTotal();
+                mostrarNumeros();
+                recargarTabla();
+
+                nombreInput.value = '';
+                telefonoInput.value = '';
             } else {
-                alert(resultado.error || 'Error al comprar');
+                mostrarError(nombreInput, resultado.error || 'Error al comprar');
             }
 
         } catch (error) {
             console.error('ERROR FETCH:', error);
         }
     }
-
 
     form.addEventListener('submit', enviarCompra);
 
@@ -133,5 +141,43 @@
             tbody.appendChild(tr);
         }
     }
+
+    /*
+    MANEJO DE ERRORES VISUALES */
+
+    function mostrarError(input, mensaje) {
+        input.classList.add('input-error');
+
+        let error = input.parentElement.querySelector('.error-msg');
+
+        if (!error) {
+            error = document.createElement('span');
+            error.classList.add('error-msg');
+            input.parentElement.appendChild(error);
+        }
+
+        error.textContent = mensaje;
+    }
+
+    function limpiarErrores() {
+        document.querySelectorAll('.input-error').forEach(el =>
+            el.classList.remove('input-error')
+        );
+
+        document.querySelectorAll('.error-msg').forEach(el =>
+            el.remove()
+        );
+    }
+
+    /*LIMPIAR ERROR AL ESCRIBIR */
+
+    [nombreInput, telefonoInput].forEach(input => {
+        input.addEventListener('input', () => {
+            input.classList.remove('input-error');
+
+            const error = input.parentElement.querySelector('.error-msg');
+            if (error) error.remove();
+        });
+    });
 
 })();
