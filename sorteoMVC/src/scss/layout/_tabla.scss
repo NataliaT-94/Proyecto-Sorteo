@@ -17,17 +17,19 @@
         padding: 3rem;
         font-size: 2rem;
         color: v.$negro;
-
-
-        &.vendido {
-            background: v.$blanco;
-            color: v.$gris;
-            cursor: not-allowed;
-        }
-            
+   
         &.seleccionado {
             background: v.$verde;
             color: v.$blanco;
         }
     }
+    .numerovendido {
+        text-align: center;
+        background: v.$blanco;
+        color: v.$naranja;
+        font-weight: 600;  
+        border: 1px solid v.$gris;      
+        cursor: not-allowed;
+    }
+         
 }

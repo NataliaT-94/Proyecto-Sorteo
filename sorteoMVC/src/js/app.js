@@ -24,6 +24,9 @@
     }
 
     function seleccionarNumero(td) {
+
+        limpiarErroresLista();
+
         const id = td.dataset.id;
         const numero = td.textContent.trim();
 
@@ -57,9 +60,10 @@
         e.preventDefault();
 
         limpiarErrores();
+        limpiarErroresLista();
 
         if (numerosSeleccionados.length === 0) {
-            mostrarError(totalInput, 'Seleccioná al menos un número');
+            mostrarErrorLista('Seleccioná al menos un número');
             return;
         }
 
@@ -88,9 +92,7 @@
             console.log('RESPUESTA API:', resultado);
 
             if (resultado.ok) {
-                console.log('Compra realizada');
 
-                // Limpieza opcional después de comprar
                 numerosSeleccionados = [];
                 actualizarTotal();
                 mostrarNumeros();
@@ -98,6 +100,7 @@
 
                 nombreInput.value = '';
                 telefonoInput.value = '';
+
             } else {
                 mostrarError(nombreInput, resultado.error || 'Error al comprar');
             }
@@ -142,8 +145,7 @@
         }
     }
 
-    /*
-    MANEJO DE ERRORES VISUALES */
+    /*ERRORES EN INPUTS*/
 
     function mostrarError(input, mensaje) {
         input.classList.add('input-error');
@@ -169,7 +171,24 @@
         );
     }
 
-    /*LIMPIAR ERROR AL ESCRIBIR */
+    /*ERROR DE LISTA DE NÚMEROS*/
+
+    function mostrarErrorLista(mensaje) {
+        limpiarErroresLista();
+
+        const error = document.createElement('span');
+        error.classList.add('error-msg');
+        error.textContent = mensaje;
+
+        lista.parentElement.appendChild(error);
+    }
+
+    function limpiarErroresLista() {
+        const error = lista.parentElement.querySelector('.error-msg');
+        if (error) error.remove();
+    }
+
+    /* LIMPIAR ERROR AL ESCRIBIR */
 
     [nombreInput, telefonoInput].forEach(input => {
         input.addEventListener('input', () => {

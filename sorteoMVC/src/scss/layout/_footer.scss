@@ -2,22 +2,23 @@
 @use 'base/mixins' as m;
 
 .registro{
-    display: grid;
-    grid-template-columns: auto 1fr auto 1fr;
-    grid-template-areas:
-        "form form form form"
-        "lista lista precio precio"
-        "comprar comprar comprar comprar";
-    column-gap: 2rem;
-    row-gap: 3rem;
     margin-top: 5rem;
+}
 
     .formulario{
         
-        grid-area: form;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            "datos datos"
+            "lista precio"
+            "comprar comprar";
+        column-gap: 4rem;
+        row-gap: 3rem;
         width: 100%;
 
         .formulario-datos{
+            grid-area: datos;
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 3rem;
@@ -45,16 +46,18 @@
                         cursor: not-allowed;
                     }
 
+                    &.input-error {
+                        border: 2px solid #ff4d4f;
+                        background-color: #fff1f0;
+                    }
+
                 }
-            }
+            }                   
         }
     }
 
     .lista {
         grid-area: lista;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
 
         .lista-titulo {
             font-size: 3rem;
@@ -85,13 +88,19 @@
         }
     }
 
+    span{
+        color: #ff4d4f;
+        font-size: 1.2rem;
+        margin: .5rem 0 0 0;
+    } 
+
 
     .precio{
         grid-area: precio;
         display: flex;
         flex-direction: column;
         gap: 1.5rem;
-        margin-top: 1.5rem;
+        align-self: start;
 
         label{
             font-size: 2rem;
@@ -126,4 +135,3 @@
             }
         } 
     }
-}
