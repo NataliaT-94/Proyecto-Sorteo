@@ -19,6 +19,14 @@ class Cliente extends ActiveRecord {
 
     }
 
+    public function atributos() {
+        return [
+            'nombre' => $this->nombre,
+            'telefono' => $this->telefono,
+            'precioTotal' => $this->precioTotal
+        ];
+    }
+
 }
 
 

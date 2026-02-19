@@ -16,6 +16,8 @@ class NumeroController {
 
     // POST /api/comprar
    public static function comprar() {
+        header('Content-Type: application/json');
+
 
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             http_response_code(405);
@@ -41,8 +43,8 @@ class NumeroController {
             'precioTotal' => count($data['numeros']) * 3000 
         ]);
 
-        $cliente->guardar();
-        $clienteId = $cliente->id;
+        $resultado = $cliente->guardar();
+        $clienteId = $resultado['id'] ?? null;
 
         if (!$clienteId) {
             http_response_code(500);
@@ -52,6 +54,7 @@ class NumeroController {
             ]);
             return;
         }
+
 
         foreach ($data['numeros'] as $numeroId) {
 
@@ -71,6 +74,7 @@ class NumeroController {
                 ]);
 
                 $compra->guardar();
+
             }
         }
 
@@ -78,6 +82,8 @@ class NumeroController {
             'ok' => true,
             'mensaje' => 'Compra realizada correctamente'
         ]);
+        exit;
+
     }
 
 }

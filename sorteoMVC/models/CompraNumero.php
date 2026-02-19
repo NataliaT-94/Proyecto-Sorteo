@@ -17,6 +17,13 @@ class CompraNumero extends ActiveRecord {
         $this->numeroId = $args['numeroId'] ?? null;
     }
 
+    public function atributos() {
+        return [
+            'clienteId' => $this->clienteId,
+            'numeroId' => $this->numeroId
+        ];
+    }
+
 
 }
 
