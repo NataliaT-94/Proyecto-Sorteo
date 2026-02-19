@@ -5,7 +5,8 @@
     const totalInput = document.querySelector('#total');
     const nombreInput = document.querySelector('#nombre');
     const telefonoInput = document.querySelector('#telefono');
-    const form = document.querySelector('form');
+    const form = document.querySelector('.formulario');
+
     const lista = document.querySelector('.lista-num');
 
     const PRECIO = 3000;
@@ -112,19 +113,33 @@
         }
     }
 
-    form.addEventListener('submit', enviarCompra);
+    if (form) {
+        form.addEventListener('submit', enviarCompra);
+    }
+
 
     async function recargarTabla() {
         const respuesta = await fetch('/api/numero');
         const numeros = await respuesta.json();
 
+        // console.log('NUMEROS API:', numeros);
+
+        numeros.sort((a, b) => Number(a.numero) - Number(b.numero));//orden de los numeros
+
         const tbody = document.querySelector('.tabla-sorteo tbody');
         tbody.innerHTML = '';
 
-        let tr = document.createElement('tr');
+        let tr;
 
         numeros.forEach((n, index) => {
+
+            if (index % 10 === 0) {
+                tr = document.createElement('tr');
+                tbody.appendChild(tr);
+            }
+
             const td = document.createElement('td');
+            td.classList.add('numero');
             td.textContent = String(n.numero).padStart(2, '0');
             td.dataset.id = n.id;
 
@@ -135,17 +150,9 @@
             }
 
             tr.appendChild(td);
-
-            if ((index + 1) % 10 === 0) {
-                tbody.appendChild(tr);
-                tr = document.createElement('tr');
-            }
         });
-
-        if (tr.children.length) {
-            tbody.appendChild(tr);
-        }
     }
+
 
     /*ERRORES EN INPUTS*/
 
