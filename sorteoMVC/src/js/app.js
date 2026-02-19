@@ -90,11 +90,17 @@
             });
 
             const resultado = await respuesta.json();
-            console.log('RESPUESTA API:', resultado);
+            // console.log('RESPUESTA API:', resultado);
 
             if (resultado.ok) {
 
                 numerosSeleccionados = [];
+
+                Swal.fire({
+                    title: "Compra realizada Correctamente!",
+                    icon: "success",
+                    draggable: true
+                });
 
                 actualizarTotal();
                 mostrarNumeros();
