@@ -1,5 +1,5 @@
-@use 'base/variables' as v;
-@use 'base/mixins' as m;
+@use '../base/variables' as v;
+@use '../base/mixins' as m;
 
 .encabezado{
     display: flex;
@@ -28,11 +28,12 @@
     .producto-imagen{
        height: 25rem;
        width: 20rem;
-       background-image: url(/sorteoMVC/public/build/img/ventilador3.png); 
+    //    background-image: url(/sorteoMVC/public/build/img/ventilador3.png); 
        background-size: cover;
        background-position: center center;
-       border: 1px solid v.$negro;
+       border: 1px solid v.$blanco;
        flex-shrink: 0; // evita que se achique
+       margin: 5px;
     }
 
     .producto-info {

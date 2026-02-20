@@ -5,8 +5,8 @@
                 <h1 class="encabezado-titulo">Sorteo Inicio de Ciclo Escolar!!!</h1>
             </div>
             <div class="producto">
-                <div class="producto-imagen"></div>
-                <!-- <img src="public/build/img/ventilador5.jpg" alt="Foto Producto"> -->
+                <!-- <div class="producto-imagen"></div> -->
+                <img class="producto-imagen" src="./build/img/ventilador2.jpg" alt="Imagen producto">
                  <div class="producto-info">
                      <h2 class="producto-nombre"><?= $producto->nombre ?></h2>
                      <p class="producto-descripcion"><?= $producto->descripcion ?></p>
