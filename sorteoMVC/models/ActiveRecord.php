@@ -159,4 +159,19 @@ class ActiveRecord
         $query = "SELECT * FROM " . static::$tabla . " ORDER BY numero ASC";
         return static::consultarSQL($query);
     }
+
+        // Obtener Registros con cierta cantidad
+    public static function get($limite) {
+        $query = "SELECT * FROM " . static::$tabla . " ORDER BY id DESC LIMIT {$limite}" ;
+        $resultado = self::consultarSQL($query);
+        return $resultado;
+    }
+    
+    // Paginar los registros
+    public static function paginar($por_pagina, $offset) {
+        $query = "SELECT * FROM " . static::$tabla . " ORDER BY id DESC LIMIT {$por_pagina} OFFSET {$offset}" ;
+        $resultado = self::consultarSQL($query);
+        return $resultado;
+    }
+    
 }

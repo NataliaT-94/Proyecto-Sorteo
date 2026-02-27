@@ -4,11 +4,11 @@ namespace Model;
 
 class Usuario extends ActiveRecord {
     protected static $tabla = 'usuarios';
-    protected static $columnasDB = ['id', 'nombre', 'apellido', 'email', 'password', 'confirmado', 'token', 'admin'];
+    protected static $columnasDB = ['id', 'nombre', 'telefono', 'email', 'password', 'confirmado', 'token', 'admin'];
 
     public $id;
     public $nombre;
-    public $apellido;
+    public $telefono;
     public $email;
     public $password;
     public $password2;
@@ -24,7 +24,7 @@ class Usuario extends ActiveRecord {
     {
         $this->id = $args['id'] ?? null;
         $this->nombre = $args['nombre'] ?? '';
-        $this->apellido = $args['apellido'] ?? '';
+        $this->telefono = $args['telefono'] ?? '';
         $this->email = $args['email'] ?? '';
         $this->password = $args['password'] ?? '';
         $this->password2 = $args['password2'] ?? '';
@@ -53,8 +53,8 @@ class Usuario extends ActiveRecord {
         if(!$this->nombre) {
             self::$alertas['error'][] = 'El Nombre es Obligatorio';
         }
-        if(!$this->apellido) {
-            self::$alertas['error'][] = 'El Apellido es Obligatorio';
+        if(!$this->telefono) {
+            self::$alertas['error'][] = 'El Telefono es Obligatorio';
         }
         if(!$this->email) {
             self::$alertas['error'][] = 'El Email es Obligatorio';

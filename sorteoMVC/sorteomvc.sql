@@ -1,12 +1,12 @@
 CREATE SCHEMA `sorteomvc` ;
 
-CREATE TABLE `sorteomvc`.`cliente` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `nombre` VARCHAR(45) NULL,
-  `telefono` INT NULL,
-  `precioTotal` DECIMAL(10,2) NULL,
-  `compraConfirmada` TINYINT(1) NULL,
-  PRIMARY KEY (`id`));
+-- CREATE TABLE `sorteomvc`.`cliente` (
+--   `id` INT NOT NULL AUTO_INCREMENT,
+--   `nombre` VARCHAR(45) NULL,
+--   `telefono` INT NULL,
+--   `precioTotal` DECIMAL(10,2) NULL,
+--   `compraConfirmada` TINYINT(1) NULL,
+--   PRIMARY KEY (`id`));
 
 
 CREATE TABLE `sorteomvc`.`producto` (
@@ -24,25 +24,45 @@ CREATE TABLE `sorteomvc`.`numero` (
   `vendido` TINYINT(1) NULL,
   PRIMARY KEY (`id`));
 
-CREATE TABLE `sorteomvc`.`compranumero` (
+CREATE TABLE `usuarios` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(40) DEFAULT NULL,
+  `telefono` varchar(20) DEFAULT NULL,
+  `email` varchar(40) DEFAULT NULL,
+  `password` varchar(60) DEFAULT NULL,
+  `confirmado` tinyint(1) DEFAULT NULL,
+  `token` varchar(13) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `admin` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+
+CREATE TABLE `sorteomvc`.`registros` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `clienteId` INT NOT NULL,
+  `usuarioId` INT NOT NULL,
   `numeroId` INT NOT NULL,
+  `productoId` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `clienteId_idx` (`clienteId` ASC) ,
+  INDEX `usuarioId_idx` (`usuarioId` ASC) ,
   INDEX `numeroId_idx` (`numeroId` ASC) ,
-  CONSTRAINT `clienteId`
-    FOREIGN KEY (`clienteId`)
-    REFERENCES `sorteomvc`.`cliente` (`id`)
+  INDEX `productoId_idx` (`productoId` ASC) ,
+  CONSTRAINT `usuarioId`
+    FOREIGN KEY (`usuarioId`)
+    REFERENCES `sorteomvc`.`usuarios` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `numeroId`
     FOREIGN KEY (`numeroId`)
     REFERENCES `sorteomvc`.`numero` (`id`)
     ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `productoId`
+    FOREIGN KEY (`productoId`)
+    REFERENCES `sorteomvc`.`producto` (`id`)
+    ON DELETE NO ACTION
     ON UPDATE NO ACTION);
 
-
+    
   INSERT INTO numero (numero)
 SELECT n
 FROM (

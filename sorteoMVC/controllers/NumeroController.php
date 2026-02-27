@@ -2,9 +2,9 @@
 
 namespace Controllers;
 
+use Model\Usuario;
 use Model\Numero;
-use Model\Cliente;
-use Model\CompraNumero;
+use Model\Registros;
 
 class NumeroController {
 
@@ -37,20 +37,20 @@ class NumeroController {
             return;
         }
 
-        $cliente = new Cliente([
+        $usuario = new Usuario([
             'nombre' => $data['nombre'],
             'telefono' => $data['telefono'],
             'precioTotal' => count($data['numeros']) * 3000 
         ]);
 
-        $resultado = $cliente->guardar();
-        $clienteId = $resultado['id'] ?? null;
+        $resultado = $usuario->guardar();
+        $usuarioId = $resultado['id'] ?? null;
 
-        if (!$clienteId) {
+        if (!$usuarioId) {
             http_response_code(500);
             echo json_encode([
                 'ok' => false,
-                'error' => 'No se pudo guardar el cliente'
+                'error' => 'No se pudo guardar el usuario'
             ]);
             return;
         }
@@ -68,8 +68,8 @@ class NumeroController {
                 $numero->vendido = 1;
                 $numero->guardar();
 
-                $compra = new CompraNumero([
-                    'clienteId' => $clienteId,
+                $compra = new Registros([
+                    'usuarioId' => $usuarioId,
                     'numeroId' => $numeroId
                 ]);
 
