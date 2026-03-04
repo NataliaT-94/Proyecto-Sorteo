@@ -36,12 +36,12 @@ class NumeroController {
             echo json_encode(['ok' => false, 'error' => 'Datos incompletos']);
             return;
         }
-
-        $usuario = new Usuario([
-            'nombre' => $data['nombre'],
-            'telefono' => $data['telefono'],
-            'precioTotal' => count($data['numeros']) * 3000 
-        ]);
+// ============= REVISAR ===================================
+        // $usuario = new Usuario([
+        //     'nombre' => $data['nombre'],
+        //     'telefono' => $data['telefono'],
+        //     'precioTotal' => count($data['numeros']) * 3000 
+        // ]);
 
         $resultado = $usuario->guardar();
         $usuarioId = $resultado['id'] ?? null;
