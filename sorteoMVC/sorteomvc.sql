@@ -42,7 +42,6 @@ CREATE TABLE `sorteomvc`.`registros` (
   `usuarioId` INT NOT NULL,
   `numeroId` INT NOT NULL,
   `productoId` INT NOT NULL,
-  `precioTotal` DECIMAL(10,2) NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `usuarioId_idx` (`usuarioId` ASC) ,
   INDEX `numeroId_idx` (`numeroId` ASC) ,
