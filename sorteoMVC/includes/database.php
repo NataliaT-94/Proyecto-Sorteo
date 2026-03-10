@@ -3,10 +3,7 @@
 function conectarDB() : mysqli {
     // Intenta establecer la conexión con la base de datos
     $db = new mysqli(
-        'localhost', 
-        'root', 
-        '', 
-        'sorteomvc'
+        $_ENV['BD_HOST'], $_ENV['BD_USER'], $_ENV['BD_PASS'], $_ENV['BD_NAME']
     );
 
     // Verifica si la conexión fue exitosa
@@ -17,3 +14,4 @@ function conectarDB() : mysqli {
     }
     return $db;
 }
+?>

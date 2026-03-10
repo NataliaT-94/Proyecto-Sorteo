@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sorteo </title>
     <link rel="stylesheet" href="/build/css/app.css">
+
+    <meta name="app-base" content="<?php echo $assetBase; ?>">
 </head>
 <body>
 

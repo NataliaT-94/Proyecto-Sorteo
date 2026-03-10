@@ -1,17 +1,17 @@
-<?php 
+<?php
 
 use Dotenv\Dotenv;
 use Model\ActiveRecord;
+
 require __DIR__ . '/../vendor/autoload.php';
 
-// Añadir Dotenv
-$dotenv = Dotenv::createImmutable(__DIR__);
-$dotenv->safeLoad();
+define('ROOT_DIR', dirname(__DIR__));
 
-require 'funciones.php';
-require 'database.php';
+$dotenv = Dotenv::createImmutable(ROOT_DIR);
+$dotenv->load();
+
+require __DIR__ . '/funciones.php';
+require __DIR__ . '/database.php';
 
 $db = conectarDB();
-
-// Conectarnos a la base de datos
 ActiveRecord::setDB($db);

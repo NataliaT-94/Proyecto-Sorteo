@@ -18,39 +18,68 @@ class Router
     }
 
     public function comprobarRutas()
-{
-    $url_actual = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-    $method = $_SERVER['REQUEST_METHOD'];
+    {
+        $url_actual = strtok($_SERVER['REQUEST_URI'], '?') ?? '/';
 
-    if($method === 'GET'){
-        $fn = $this->getRoutes[$url_actual] ?? null;
-    } else {
-        $fn = $this->postRoutes[$url_actual] ?? null;
+        $scriptDir = str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? '/'));
+        $scriptDir = rtrim($scriptDir, '/');
+
+        if ($scriptDir && $scriptDir !== '/' && strpos($url_actual, $scriptDir) === 0) {
+            $url_actual = substr($url_actual, strlen($scriptDir)) ?: '/';
+        }
+
+        if ($url_actual === '') {
+            $url_actual = '/';
+        }
+
+        $url_actual = rtrim($url_actual, '/') ?: '/';
+
+        $this->currentUrl = $url_actual;
+
+        $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
+
+        if($method === 'GET'){
+            $fn = $this->getRoutes[$url_actual] ?? null;
+        } else {
+            $fn = $this->postRoutes[$url_actual] ?? null;
+        }
+
+        if($fn){
+            $fn($this);
+        } else {
+            http_response_code(404);
+            echo "404 - Ruta no encontrada";
+        }
     }
-
-    if($fn){
-        call_user_func($fn, $this);
-    } else {
-        http_response_code(404);
-        echo "404 - Ruta no encontrada";
-    }
-}
-
 
     public function render($view, $datos = [])
     {
-        foreach($datos as $key=>$value){
+        foreach($datos as $key => $value){
             $$key = $value;
+        }
+
+        if (!defined('ROOT_DIR')) {
+            define('ROOT_DIR', dirname(__DIR__));
+        }
+
+        $scriptDir = rtrim(str_replace('\\','/', dirname($_SERVER['SCRIPT_NAME'] ?? '/')), '/');
+        $basePath = ($scriptDir && $scriptDir !== '/') ? ($scriptDir . '/') : '/';
+
+        $assetBase = $basePath;
+
+        $viewPath = ROOT_DIR . "/views/$view.php";
+
+        if(!file_exists($viewPath)){
+            echo "La vista $view no existe";
+            exit;
         }
 
         ob_start();
 
-        include_once __DIR__ . "/views/$view.php";
+        include_once $viewPath;
 
+        $contenido = ob_get_clean();
 
-      $contenido = ob_get_clean();//Limpiamos la memoria
-      include __DIR__ . "/views/layout.php";
+        include_once ROOT_DIR . '/views/layout.php';
     }
-
 }
-

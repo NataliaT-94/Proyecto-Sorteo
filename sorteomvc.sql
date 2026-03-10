@@ -67,3 +67,11 @@ FROM (
     UNION ALL SELECT 91 UNION ALL SELECT 92 UNION ALL SELECT 93 UNION ALL SELECT 94 UNION ALL SELECT 95
     UNION ALL SELECT 96 UNION ALL SELECT 97 UNION ALL SELECT 98 UNION ALL SELECT 99 UNION ALL SELECT 00
 ) t;
+
+INSERT INTO producto (nombre, descripcion, fecha, precio) 
+VALUES (
+'ventilador de pie klauben kla v-20',
+'3 velocidades ajustables para adaptarse a tus necesidades de ventilación, Aspas metálicas color cobre de 20" que garantizan un flujo de aire de 220 m³/h, Altura ajustable hasta 170 cm para una distribución óptima del aire, Sistema de seguridad automático para tu tranquilidad, Bajo consumo energético de solo 0,1 kW/h',
+'2026-03-04',
+3000
+);
